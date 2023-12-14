@@ -15,23 +15,38 @@ public class MyTriplifier implements Triplifier {
 
     @Override
     public void triplify(Properties properties, FacadeXGraphBuilder facadeXGraphBuilder) throws IOException, TriplifierHTTPException {
-        String rootId = "my_root_id";
+
+        // Declare the identifier of the data source id, use the default data source id "".
         String dataSourceId = SPARQLAnythingConstants.DATA_SOURCE_ID;
 
+        // Get the identifier of the root container
+        String rootId = Triplifier.getRootArgument(properties);
+
+        // Get the input stream form the resource
         InputStream inputStream = Triplifier.getInputStream(properties);
-        facadeXGraphBuilder.addRoot(rootId);
+
+        // add the root container
+        facadeXGraphBuilder.addRoot(dataSourceId);
+
+        // add slots to the root container
         int slot = 1;
-        for(int byteRead = inputStream.read(); byteRead!=-1; byteRead = inputStream.read()){
+        for (int byteRead = inputStream.read(); byteRead != -1; byteRead = inputStream.read()) {
             facadeXGraphBuilder.addValue(dataSourceId, rootId, slot++, (char) byteRead);
         }
         inputStream.close();
     }
 
+    /*
+    Define the mime types of the triplifier
+     */
     @Override
     public Set<String> getMimeTypes() {
         return Sets.newHashSet("my-mime-type");
     }
 
+    /*
+    Define the mime types of the extensions
+     */
     @Override
     public Set<String> getExtensions() {
         return Sets.newHashSet("myext");
