@@ -1,5 +1,5 @@
 # JavaClientExample
-This project shows how to extend SPARQL Anything by adding a new Triplifier.
+This project shows how to extend SPARQL Anything by adding a triplifier, a function and a magic property.  
 
 You can compile the project by using Maven.
 
