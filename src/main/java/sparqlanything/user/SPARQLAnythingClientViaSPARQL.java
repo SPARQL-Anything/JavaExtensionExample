@@ -1,6 +1,7 @@
 package sparqlanything.user ;
 
 import io.github.sparqlanything.engine.FacadeX;
+import io.github.sparqlanything.model.TriplifierRegister;
 import io.github.sparqlanything.model.TriplifierRegisterException;
 import org.apache.jena.query.*;
 import org.apache.jena.sparql.engine.main.QC;
@@ -20,7 +21,7 @@ public class SPARQLAnythingClientViaSPARQL {
 		QC.setFactory(ARQ.getContext(), FacadeX.ExecutorFactory);
 
 		// Register the new Triplifier
-		FacadeX.Registry.registerTriplifier(MyTriplifier.class.getCanonicalName(), new String[]{"myext"}, new String[]{"my-mime-type"});
+		TriplifierRegister.getInstance().registerTriplifier(MyTriplifier.class.getCanonicalName(), new String[]{"myext"}, new String[]{"my-mime-type"});
 
 		// Register the new function
 		FunctionRegistry.get().put("http://example.org/theAnswer", TheAnswer.class);
